@@ -14,11 +14,24 @@ def listTeams_resolver(obj, info):
         }
     return payload
 
+def getTeam_ByName_resolver(obj, info, name):
+    try:
+        team = Team.query.filter_by(name=name).first()
+        payload = {
+            "success": True,
+            "team": team.to_dict()
+        }
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": [f"Team item matching {name} not found"]
+        }
+    return payload
+
 
 def listRegions_resolver(obj, info):
     try:
         regions = [region.to_dict() for region in Region.query.all()]
-        print(regions)
         payload = {
             "success": True,
             "region": regions
@@ -30,16 +43,32 @@ def listRegions_resolver(obj, info):
         }
     return payload
 
-def getTeam_ByName_resolver(obj, info, name):
+
+def listPlayers_resolver(obj, info):
     try:
-        team = Team.query.filter_by(name=name).first()
+        players = [player.to_dict() for player in Player.query.all()]
+        print(players)
         payload = {
             "success": True,
-            "team": team.to_dict()
+            "player": players
         }
-    except AttributeError:  # todo not found
+    except Exception as error:
         payload = {
             "success": False,
-            "errors": [f"Team item matching {name} not found"]
+            "errors": [str(error)]
+        }
+    return payload
+
+def getPlayer_ByName_resolver(obj, info, name):
+    try:
+        player = Player.query.filter_by(name=name).first()
+        payload = {
+            "success": True,
+            "player": player.to_dict()
+        }
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": [f"Player item matching {name} not found"]
         }
     return payload

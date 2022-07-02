@@ -54,14 +54,14 @@ class Player(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "Name": self.name,
-            "Nationality": self.nationality,
-            "Born": self.born,
-            "Region": self.region,
-            "Status": self.status,
-            "Team": self.team,
-            "Alternate IDs": self.alternate_IDs,
-            "Approx Total Winnings (dollars)": self.approx_Total_Winnings
+            "name": self.name,
+            "nationality": self.nationality,
+            "born": self.born,
+            "region": self.region,
+            "status": self.status,
+            "team": self.team,
+            "alternate_IDs": self.alternate_IDs,
+            "approx_Total_Winnings": self.approx_Total_Winnings
         }
 
 
