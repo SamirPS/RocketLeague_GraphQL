@@ -47,7 +47,7 @@ type TeamsResult {
 type RegionsResult {
     success: Boolean!
     errors: [String]
-    region: Region
+    region: [Region]
 }
 
 type PlayerResult {
@@ -64,5 +64,6 @@ type PlayersResult {
 
 type Query {
     listAllTeams: TeamsResult!
+    listAllRegions: RegionsResult!
     getTeam_ByName(name: String!): TeamResult!
 }

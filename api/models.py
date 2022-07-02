@@ -7,7 +7,7 @@ class Region(db.Model):
     name = db.Column(db.String,primary_key=True)
     def to_dict(self):
         return {
-            "Name": self.name
+            "name": self.name
         }
 
 

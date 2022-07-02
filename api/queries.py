@@ -1,10 +1,8 @@
-from .models import Team
-from ariadne import convert_kwargs_to_snake_case
+from .models import Team,Region,Player
 
 def listTeams_resolver(obj, info):
     try:
         teams = [team.to_dict() for team in Team.query.all()]
-        print(teams)
         payload = {
             "success": True,
             "teams": teams
@@ -16,7 +14,22 @@ def listTeams_resolver(obj, info):
         }
     return payload
 
-@convert_kwargs_to_snake_case
+
+def listRegions_resolver(obj, info):
+    try:
+        regions = [region.to_dict() for region in Region.query.all()]
+        print(regions)
+        payload = {
+            "success": True,
+            "region": regions
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload
+
 def getTeam_ByName_resolver(obj, info, name):
     try:
         team = Team.query.filter_by(name=name).first()
