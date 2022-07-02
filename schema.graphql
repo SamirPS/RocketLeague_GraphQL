@@ -1,0 +1,32 @@
+schema {
+    query: Query
+}
+
+type Team {
+    id: ID!
+    region: String!
+    name: String!
+    player_one: String!
+    player_two: String!
+    player_three: String!
+    player_sub: String!
+    coach: String!
+
+}
+
+type TeamResult {
+    success: Boolean!
+    errors: [String]
+    team: Team
+}
+
+type TeamsResult {
+    success: Boolean!
+    errors: [String]
+    teams: [Team]
+}
+
+type Query {
+    listAllTeams: TeamsResult!
+    getTeam_ByName(name: String!): TeamResult!
+}
