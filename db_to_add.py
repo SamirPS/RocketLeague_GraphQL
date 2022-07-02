@@ -16,7 +16,7 @@ db.session.commit()
 
 from api.models import Team
 Vitality = Team(region="EU",name="Vitality",player_one="Kaydop",player_two="Alpha54",player_three="Radosin",player_sub="FairyPeak",coach="Ferra")
-Moist = Team(region="NA",name="Moist Esports",player_one="Joyo",player_two="Vatira",player_three="Rise",player_sub="",coach="Noah")
+Moist = Team(region="EU",name="Moist Esports",player_one="Joyo",player_two="Vatira",player_three="Rise",player_sub="",coach="Noah")
 
 G2 = Team(region="NA",name="G2 Esports",player_one="JKnaps",player_two="Chicago",player_three="Atomic",player_sub="",coach="Satthew")
 NRG = Team(region="NA",name="The General NRG",player_one="GarrettG",player_two="jstn",player_three="SquishyMuffinz",player_sub="Musty",coach="Sizz")
