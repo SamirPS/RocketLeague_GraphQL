@@ -1,6 +1,19 @@
 from app import db
 
+
+class Region(db.Model):
+    __tablename__ = "region"
+
+    name = db.Column(db.String,primary_key=True)
+    def to_dict(self):
+        return {
+            "Name": self.name
+        }
+
+
 class Team(db.Model):
+    __tablename__ = "team"
+
     id = db.Column(db.Integer, primary_key=True)
     region = db.Column(db.String)
     name = db.Column(db.String)
@@ -9,6 +22,8 @@ class Team(db.Model):
     player_three = db.Column(db.String)
     player_sub = db.Column(db.String)
     coach = db.Column(db.String)
+    
+
 
     def to_dict(self):
         return {
@@ -21,4 +36,36 @@ class Team(db.Model):
             "player_sub": self.player_sub,
             "coach": self.coach
         }
+
+class Player(db.Model):
+    __tablename__ = 'player'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    nationality = db.Column(db.String)
+    born = db.Column(db.String)
+    region = db.Column(db.String)
+    status = db.Column(db.String)
+    team = db.Column(db.String)
+    alternate_IDs = db.Column(db.String)
+    approx_Total_Winnings = db.Column(db.String)
+ 
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "Name": self.name,
+            "Nationality": self.nationality,
+            "Born": self.born,
+            "Region": self.region,
+            "Status": self.status,
+            "Team": self.team,
+            "Alternate IDs": self.alternate_IDs,
+            "Approx Total Winnings (dollars)": self.approx_Total_Winnings
+        }
+
+
+
+
+
 

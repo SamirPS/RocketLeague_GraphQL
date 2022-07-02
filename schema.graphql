@@ -14,6 +14,24 @@ type Team {
 
 }
 
+type Region {
+    name: String!
+}
+
+type Player {
+    id: ID!
+    name: String!
+    nationality: String!
+    born: String!
+    region: String!
+    status: String!
+    team: String!
+    alternate_IDs: String!
+    approx_Total_Winnings: String!
+
+}
+
+   
 type TeamResult {
     success: Boolean!
     errors: [String]
@@ -24,6 +42,24 @@ type TeamsResult {
     success: Boolean!
     errors: [String]
     teams: [Team]
+}
+
+type RegionsResult {
+    success: Boolean!
+    errors: [String]
+    region: Region
+}
+
+type PlayerResult {
+    success: Boolean!
+    errors: [String]
+    player: Player
+}
+
+type PlayersResult {
+    success: Boolean!
+    errors: [String]
+    player: [Player]
 }
 
 type Query {
