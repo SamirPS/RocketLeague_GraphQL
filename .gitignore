@@ -2,7 +2,7 @@ bin/
 include/
 __pycache__/
 lib/
-lib64/
+lib64
 share/
 pyvenv.cfg
 to_me.txt
