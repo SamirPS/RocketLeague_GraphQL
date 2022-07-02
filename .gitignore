@@ -6,3 +6,4 @@ lib64
 share/
 pyvenv.cfg
 to_me.txt
+db_to_add.py
