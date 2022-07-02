@@ -64,6 +64,7 @@ type PlayersResult {
 type Query {
     listAllTeams: TeamsResult!
     getTeam_ByName(name: String!): TeamResult!
+    getTeam_ByRegion(region: String!): TeamsResult!
 
     listAllRegions: RegionsResult!
 

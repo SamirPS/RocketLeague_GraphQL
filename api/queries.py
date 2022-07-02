@@ -28,6 +28,19 @@ def getTeam_ByName_resolver(obj, info, name):
         }
     return payload
 
+def getTeam_ByRegion_resolver(obj, info, region):
+    try:
+        teams =  [team.to_dict() for team in Team.query.filter_by(region=region)]
+        payload = {
+            "success": True,
+            "teams": teams
+        }
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": [f"Region item matching {region} not found"]
+        }
+    return payload
 
 def listRegions_resolver(obj, info):
     try:
