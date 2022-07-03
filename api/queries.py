@@ -60,7 +60,6 @@ def listRegions_resolver(obj, info):
 def listPlayers_resolver(obj, info):
     try:
         players = [player.to_dict() for player in Player.query.all()]
-        print(players)
         payload = {
             "success": True,
             "player": players
@@ -91,7 +90,7 @@ def getPlayer_ByRegion_resolver(obj, info, region):
         players = [player.to_dict() for player in Player.query.filter_by(region=region)]
         payload = {
             "success": True,
-            "players": players
+            "player": players
         }
     except AttributeError:
         payload = {
