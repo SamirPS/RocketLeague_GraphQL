@@ -30,6 +30,7 @@ db.session.add(SSA)
 db.session.commit()
 
 from api.models import Team
+
 EU_Team=Get_EU_Teams()
 NA_Team=Get_NA_Teams()
 OCE_Team=Get_OCE_Teams()

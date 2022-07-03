@@ -36,12 +36,12 @@ def Get_The_Team(LinkOfActiveTeams):
         for j in Coach_Name:
             Coach_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
             Players_Of_The_Team["coach"]=Coach_Name[0]
-            
+
         i=i.replace("_"," ")
         Players_Of_The_Team["name"]=i
         List_Of_Teams.append(Players_Of_The_Team)
         
-        print(Players_Of_The_Team)
+       
     return List_Of_Teams
 
 def Get_EU_Teams():
