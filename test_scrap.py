@@ -24,23 +24,25 @@ def Get_The_Team(LinkOfActiveTeams):
         Player_Team=re.findall(r'<tr class="Player">(.*?)</tr>',Roster)
         count=1
         for j in Player_Team:
+            Player_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
+            Player_Name[0]=Player_Name[0].replace("index.php?title=","")
+            Player_Name[0]=Player_Name[0].replace("&amp;action=edit&amp;redlink=1","")
             if "Substitute" in j:
-                
-                Player_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
                 Players_Of_The_Team["sub"]=Player_Name[0]
             else:
-                Player_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
                 Players_Of_The_Team[str(count)]=Player_Name[0]
             count+=1
         Coach_Name=re.findall(r'<tr class="Player coach"(.*?)</tr>',Roster)
         for j in Coach_Name:
             Coach_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
+            Coach_Name[0]=Coach_Name[0].replace("index.php?title=","")
+            Coach_Name[0]=Coach_Name[0].replace("&amp;action=edit&amp;redlink=1","")
             Players_Of_The_Team["coach"]=Coach_Name[0]
 
         i=i.replace("_"," ")
         Players_Of_The_Team["name"]=i
         List_Of_Teams.append(Players_Of_The_Team)
-        
+        print(Players_Of_The_Team)
        
     return List_Of_Teams
 
