@@ -70,6 +70,6 @@ type Query {
 
     listAllPlayers: PlayersResult!
     getPlayer_ByName(name: String!): PlayerResult!
-
+    getPlayer_ByRegion(region: String!): PlayersResult!
     
 }

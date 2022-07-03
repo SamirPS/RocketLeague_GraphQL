@@ -85,3 +85,17 @@ def getPlayer_ByName_resolver(obj, info, name):
             "errors": [f"Player item matching {name} not found"]
         }
     return payload
+
+def getPlayer_ByRegion_resolver(obj, info, region):
+    try:
+        players = [player.to_dict() for player in Player.query.filter_by(region=region)]
+        payload = {
+            "success": True,
+            "players": players
+        }
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": [f"Region item matching {region} not found"]
+        }
+    return payload
