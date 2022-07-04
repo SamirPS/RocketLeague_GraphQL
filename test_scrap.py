@@ -61,7 +61,7 @@ def Get_Teams(page):
 
     return Get_Information_About_Team(LinkOfActiveTeam)
 
-def get_players(page):
+def get_players(page,number=None):
     time.sleep(30)
     headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
     Region_Player=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={page}&format=json",headers=headers).json()["parse"]["text"]["*"]
@@ -73,6 +73,8 @@ def get_players(page):
         if "&amp;action=edit&amp;redlink=1" not in link_of_user:
             link_players.append(link_of_user)
     i=1
+    if number!=None:
+        link_players=link_players[0:number]
     for player in link_players:
         info_about_player={}
         time.sleep(30) 

@@ -79,7 +79,8 @@ for i in SSA_Team:
 
 
 from api.models import Player
-all_player=get_players("Portal:Players/Europe")+get_players("Portal:Players/Americas")+get_players("Portal:Players/Oceania")+get_players("Portal:Players/Asia")+get_players("Portal:Players/Africa")
+# i take only five player by region, else too long
+all_player=get_players("Portal:Players/Europe",5)+get_players("Portal:Players/Americas",5)+get_players("Portal:Players/Oceania",5)+get_players("Portal:Players/Asia",5)+get_players("Portal:Players/Africa",5)
 
 for i in all_player:
     x=Player(name=i["name"],nationality=i["nationality"],born=i["born"],status=i["status"],team=i["team"],otherpseudo=i["otherpseudo"],winningmonney=i["winningmonney"])
