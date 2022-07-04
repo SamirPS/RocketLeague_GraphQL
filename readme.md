@@ -1,5 +1,7 @@
 # RocketLeague_GraphQL
 
+[![Run Script](https://github.com/SamirPS/RocketLeague_GraphQL/actions/workflows/main.yml/badge.svg)](https://github.com/SamirPS/RocketLeague_GraphQL/actions/workflows/main.yml)
+
 ## Introduction
 
 I created this project to learn how to use GraphQL with python. For this, I used data from the game Rocket League (Team, Region, Player) available via the site: https://liquipedia.net/rocketleague and their api.
