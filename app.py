@@ -3,7 +3,7 @@ from ariadne import load_schema_from_path, make_executable_schema, \
     graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
-from api.queries import listTeams_resolver,getTeam_ByName_resolver,listRegions_resolver,listPlayers_resolver,getPlayer_ByName_resolver,getTeam_ByRegion_resolver,getPlayer_ByRegion_resolver
+from api.queries import listTeams_resolver,getTeam_ByName_resolver,listRegions_resolver,listPlayers_resolver,getPlayer_ByName_resolver,getTeam_ByRegion_resolver
 
 query = ObjectType("Query")
 
@@ -16,7 +16,6 @@ query.set_field("listAllRegions", listRegions_resolver)
 
 query.set_field("listAllPlayers", listPlayers_resolver)
 query.set_field("getPlayer_ByName", getPlayer_ByName_resolver)
-query.set_field("getPlayer_ByRegion", getPlayer_ByRegion_resolver)
 
 
 

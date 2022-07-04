@@ -44,7 +44,6 @@ class Player(db.Model):
     name = db.Column(db.String)
     nationality = db.Column(db.String)
     born = db.Column(db.String)
-    region = db.Column(db.String)
     status = db.Column(db.String)
     team = db.Column(db.String)
     otherpseudo = db.Column(db.String)
@@ -57,7 +56,6 @@ class Player(db.Model):
             "name": self.name,
             "nationality": self.nationality,
             "born": self.born,
-            "region": self.region,
             "status": self.status,
             "team": self.team,
             "otherpseudo": self.otherpseudo,

@@ -23,7 +23,6 @@ type Player {
     name: String!
     nationality: String!
     born: String!
-    region: String!
     status: String!
     team: String!
     otherpseudo: String!
@@ -70,6 +69,5 @@ type Query {
 
     listAllPlayers: PlayersResult!
     getPlayer_ByName(name: String!): PlayerResult!
-    getPlayer_ByRegion(region: String!): PlayersResult!
     
 }

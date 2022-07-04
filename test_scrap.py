@@ -61,15 +61,58 @@ def Get_Teams(page):
 
     return Get_Information_About_Team(LinkOfActiveTeam)
 
-def get_players():
+def get_players(page):
     time.sleep(30)
     headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    EU_Player=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Players/Europe&format=json",headers=headers).json()["parse"]["text"]["*"]
+    Region_Player=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={page}&format=json",headers=headers).json()["parse"]["text"]["*"]
     link_players = []
-    rows = re.findall(r'<tr><td style="text-align:left">(.*?)</td>',EU_Player)
+    info_all_player=[]
+    rows = re.findall(r'<tr><td style="text-align:left">(.*?)</td>',Region_Player)
     for row in rows:
         link_of_user=re.findall(r'<a href="(.*?)" title="(.*?)">',row)[-1][0]
         if "&amp;action=edit&amp;redlink=1" not in link_of_user:
-            link_players.append(link_of_user) 
-    return link_players
-print(get_players())
+            link_players.append(link_of_user)
+    i=1
+    for player in link_players:
+        info_about_player={}
+        time.sleep(30) 
+        player=player.replace("/rocketleague/","")
+        Player_in_Progress=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={player}&format=json",headers=headers).json()["parse"]["text"]["*"]
+       
+        
+        start = '<div class="fo-nttax-infobox wiki-bordercolor-light">'
+        end = '<div class="fo-nttax-infobox-adbox wiki-bordercolor-light">'
+        Information_Player_In_Progress=Player_in_Progress[Player_in_Progress.find(start)+len(start):Player_in_Progress.rfind(end)]
+
+        if '<div class="infobox-cell-2">Player</div>' not in Information_Player_In_Progress:
+            continue
+
+        Information_Player_In_Progress_all_div={i[0]:i[1] for i in re.findall(r'<div class="infobox-cell-2 infobox-description">(.*?)</div><div class="infobox-cell-2">(.*?)</div>', Information_Player_In_Progress) }
+        info_about_player["name"]=Information_Player_In_Progress_all_div["Name:"]
+        try:
+            info_about_player["born"]=Information_Player_In_Progress_all_div["Born:"]
+        except:
+            info_about_player["born"]=""
+        
+
+        info_about_player["status"]=Information_Player_In_Progress_all_div["Status:"]
+        
+        info_about_player["winningmonney"]=Information_Player_In_Progress_all_div["Approx. Total Winnings:"]
+        try:
+            info_about_player["otherpseudo"]=Information_Player_In_Progress_all_div["Alternate IDs:"]
+        except:
+            info_about_player["otherpseudo"]=""
+        try:
+            team=re.findall(r'>(.*?)</a>', Information_Player_In_Progress_all_div["Team:"])
+            if "&amp;action=edit&amp;redlink=1" in team[-1]:
+                info_about_player["team"]=""
+            else:
+                info_about_player["team"]=team[-1]
+        except:
+            info_about_player["team"]=""
+        
+        nationality=re.findall(r'<span class="flag"><a href="/rocketleague/Category:(.*?)"', Information_Player_In_Progress_all_div["Nationality:"])
+        info_about_player["nationality"]=",".join(nationality)
+        info_all_player.append(info_about_player)
+    return info_all_player
+

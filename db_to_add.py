@@ -79,12 +79,13 @@ for i in SSA_Team:
 
 
 from api.models import Player
-Vatira=Player(name="Axel Touret",nationality="France",born="May 14, 2006",region="EU",status="Active",team="Moist Esports",otherpseudo="Vati",winningmonney="74,978")
+all_player=get_players("Portal:Players/Europe")+get_players("Portal:Players/Americas")+get_players("Portal:Players/Oceania")+get_players("Portal:Players/Asia")+get_players("Portal:Players/Africa")
 
-Turboplosa=Player(name="Pierre Silfver",nationality="Sweden",born="August 9, 1998",region="NA",status="Active",team="OpTic Gaming",otherpseudo="Turururu, Turbop0lsa, Turbo",winningmonney="446,102")
+for i in all_player:
+    x=Player(name=i["name"],nationality=i["nationality"],born=i["born"],status=i["status"],team=i["team"],otherpseudo=i["otherpseudo"],winningmonney=i["winningmonney"])
+    db.session.add(x)
+    db.session.commit()
 
-db.session.add(Vatira)
-db.session.add(Turboplosa)
 
 
 db.session.commit()

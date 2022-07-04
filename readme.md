@@ -130,7 +130,6 @@ query {
       name
       nationality
       born
-      region
       status
       team
       winningmonney
@@ -154,30 +153,6 @@ query {
       name
       nationality
       born
-      region
-      status
-      team
-      winningmonney
-      otherpseudo
-    }
-  }
-}
-
-```
-
-#### Get players by region
-
-If you want to get information about all the players in a region.Use the following query:
-
-```graphql
-query {
-  getPlayer_ByRegion(region: "EU") {
-    player {
-      id
-      name
-      nationality
-      born
-      region
       status
       team
       winningmonney
