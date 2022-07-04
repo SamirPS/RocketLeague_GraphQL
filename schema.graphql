@@ -71,5 +71,6 @@ type Query {
 
     listAllPlayers: PlayersResult!
     getPlayer_ByName(name: String!): PlayerResult!
+    getPlayer_ByPseudo_resolver(pseudo: String!): PlayerResult!
     
 }
