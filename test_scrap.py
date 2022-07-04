@@ -116,3 +116,4 @@ def get_players(page):
         info_all_player.append(info_about_player)
     return info_all_player
 
+

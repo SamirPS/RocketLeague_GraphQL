@@ -49,7 +49,6 @@ class Player(db.Model):
     otherpseudo = db.Column(db.String)
     winningmonney = db.Column(db.String)
  
-
     def to_dict(self):
         return {
             "id": self.id,

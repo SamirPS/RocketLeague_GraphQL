@@ -71,6 +71,7 @@ def listPlayers_resolver(obj, info):
         }
     return payload
 
+
 def getPlayer_ByName_resolver(obj, info, name):
     try:
         player = Player.query.filter_by(name=name).first()

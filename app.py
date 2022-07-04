@@ -12,6 +12,7 @@ query.set_field("getTeam_ByName", getTeam_ByName_resolver)
 query.set_field("getTeam_ByRegion", getTeam_ByRegion_resolver)
 
 
+
 query.set_field("listAllRegions", listRegions_resolver)
 
 query.set_field("listAllPlayers", listPlayers_resolver)

@@ -85,8 +85,3 @@ for i in all_player:
     x=Player(name=i["name"],nationality=i["nationality"],born=i["born"],status=i["status"],team=i["team"],otherpseudo=i["otherpseudo"],winningmonney=i["winningmonney"])
     db.session.add(x)
     db.session.commit()
-
-
-
-db.session.commit()
-
