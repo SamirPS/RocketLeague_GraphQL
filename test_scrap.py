@@ -144,3 +144,14 @@ def Get_SSA_Teams():
     LinkOfActiveTeamOCE=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
 
     return Get_The_Team(LinkOfActiveTeamOCE)
+
+def get_players():
+    time.sleep(30)
+    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
+    EU_Player=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Players/Europe&format=json",headers=headers).json()["parse"]["text"]["*"]
+    players = []
+    rows = re.findall(r'<td style="text-align:left">(.*?)</td>',EU_Player)
+    print([i for i in rows if ("Coach","Manager","Producer","Caster","Player/Coach") not in i])
+
+    return players
+print(get_players())
