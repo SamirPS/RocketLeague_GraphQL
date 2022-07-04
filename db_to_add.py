@@ -32,14 +32,14 @@ db.session.commit()
 
 from api.models import Team
 
-EU_Team=Get_EU_Teams()
-NA_Team=Get_NA_Teams()
-OCE_Team=Get_OCE_Teams()
-SAM_Team=Get_SAM_Teams()
-MENA_Team=Get_MENA_Teams()
-APACN_Team=Get_APACN_Teams()
-APACS_Team=Get_APACS_Teams()
-SSA_Team=Get_SSA_Teams()
+EU_Team=Get_Teams("Portal:Teams/Europe")
+NA_Team=Get_Teams("Portal:Teams/North_America")
+OCE_Team=Get_Teams("Portal:Teams/Oceania")
+SAM_Team=Get_Teams("Portal:Teams/South_America")
+MENA_Team=Get_Teams("Portal:Teams/Middle_East_and_North_Africa")
+APACN_Team=Get_Teams("Portal:Teams/Asia-Pacific_North")
+APACS_Team=Get_Teams("Portal:Teams/Asia-Pacific_South")
+SSA_Team=Get_Teams("Portal:Teams/Sub-Saharan_Africa")
 
 
 for i in EU_Team:

@@ -2,7 +2,7 @@ import requests
 import re
 import time
 
-def Get_The_Team(LinkOfActiveTeams):
+def Get_Information_About_Team(LinkOfActiveTeams):
     List_Of_Teams=[]
     headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
     for i in LinkOfActiveTeams:
@@ -46,112 +46,30 @@ def Get_The_Team(LinkOfActiveTeams):
        
     return List_Of_Teams
 
-def Get_EU_Teams():
+def Get_Teams(page):
 
     time.sleep(30)
     headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    EuropeNotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/Europe&format=json",headers=headers).json()["parse"]["text"]["*"]
+    Notable_Teams=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={page}&format=json",headers=headers).json()["parse"]["text"]["*"]
     
     
     start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
     end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=EuropeNotableTeams[EuropeNotableTeams.find(start)+len(start):EuropeNotableTeams.rfind(end)]
+    Active_Team=Notable_Teams[Notable_Teams.find(start)+len(start):Notable_Teams.rfind(end)]
 
-    LinkOfActiveTeamEU=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
+    LinkOfActiveTeam=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
 
-    return Get_The_Team(LinkOfActiveTeamEU)
-
-def Get_NA_Teams():
-
-    time.sleep(30)
-    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    NANotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/North_America&format=json",headers=headers).json()["parse"]["text"]["*"]
-
-    start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
-    end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=NANotableTeams[NANotableTeams.find(start)+len(start):NANotableTeams.rfind(end)]
-
-    LinkOfActiveTeamNA=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
-    return Get_The_Team(LinkOfActiveTeamNA)
-    
-def Get_OCE_Teams():
-    time.sleep(30)
-    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    OCENotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/Oceania&format=json",headers=headers).json()["parse"]["text"]["*"]
-    start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
-    end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=OCENotableTeams[OCENotableTeams.find(start)+len(start):OCENotableTeams.rfind(end)]
-
-    LinkOfActiveTeamOCE=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
-
-    return Get_The_Team(LinkOfActiveTeamOCE)    
-
-def Get_SAM_Teams():
-    time.sleep(30)
-    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    OCENotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/South_America&format=json",headers=headers).json()["parse"]["text"]["*"]
-    start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
-    end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=OCENotableTeams[OCENotableTeams.find(start)+len(start):OCENotableTeams.rfind(end)]
-
-    LinkOfActiveTeamOCE=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
-
-    return Get_The_Team(LinkOfActiveTeamOCE)
-
-def Get_MENA_Teams():
-    time.sleep(30)
-    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    OCENotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/Middle_East_and_North_Africa&format=json",headers=headers).json()["parse"]["text"]["*"]
-    start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
-    end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=OCENotableTeams[OCENotableTeams.find(start)+len(start):OCENotableTeams.rfind(end)]
-
-    LinkOfActiveTeamOCE=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
-    return Get_The_Team(LinkOfActiveTeamOCE)
-
-def Get_APACN_Teams():
-    time.sleep(30)
-    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    OCENotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/Asia-Pacific_North&format=json",headers=headers).json()["parse"]["text"]["*"]
-    start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
-    end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=OCENotableTeams[OCENotableTeams.find(start)+len(start):OCENotableTeams.rfind(end)]
-
-    LinkOfActiveTeamOCE=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
-
-    return Get_The_Team(LinkOfActiveTeamOCE)
-
-def Get_APACS_Teams():
-    time.sleep(30)
-    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    OCENotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/Asia-Pacific_South&format=json",headers=headers).json()["parse"]["text"]["*"]
-    start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
-    end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=OCENotableTeams[OCENotableTeams.find(start)+len(start):OCENotableTeams.rfind(end)]
-
-    LinkOfActiveTeamOCE=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
-    return Get_The_Team(LinkOfActiveTeamOCE)
-    
-
-def Get_SSA_Teams():
-    time.sleep(30)
-    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
-    OCENotableTeams=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Teams/Sub-Saharan_Africa&format=json",headers=headers).json()["parse"]["text"]["*"]
-    start = '<span class="mw-headline" id="Active_teams">Active teams</span>'
-    end = '<span class="mw-headline" id="Disbanded_teams">Disbanded teams</span>'
-    Active_Team=OCENotableTeams[OCENotableTeams.find(start)+len(start):OCENotableTeams.rfind(end)]
-
-    LinkOfActiveTeamOCE=re.findall(r'<span class="team-template-text"><a href="(.*?)"',Active_Team)
-
-    return Get_The_Team(LinkOfActiveTeamOCE)
+    return Get_Information_About_Team(LinkOfActiveTeam)
 
 def get_players():
     time.sleep(30)
     headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
     EU_Player=requests.get("https://liquipedia.net/rocketleague/api.php?action=parse&page=Portal:Players/Europe&format=json",headers=headers).json()["parse"]["text"]["*"]
-    players = []
-    rows = re.findall(r'<td style="text-align:left">(.*?)</td>',EU_Player)
-    print([i for i in rows if ("Coach","Manager","Producer","Caster","Player/Coach") not in i])
-
-    return players
+    link_players = []
+    rows = re.findall(r'<tr><td style="text-align:left">(.*?)</td>',EU_Player)
+    for row in rows:
+        link_of_user=re.findall(r'<a href="(.*?)" title="(.*?)">',row)[-1][0]
+        if "&amp;action=edit&amp;redlink=1" not in link_of_user:
+            link_players.append(link_of_user) 
+    return link_players
 print(get_players())
