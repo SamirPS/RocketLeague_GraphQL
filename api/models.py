@@ -48,7 +48,7 @@ class Player(db.Model):
     team = db.Column(db.String)
     otherpseudo = db.Column(db.String)
     winningmonney = db.Column(db.String)
- 
+    pseudo = db.Column(db.String)
     def to_dict(self):
         return {
             "id": self.id,
@@ -58,7 +58,8 @@ class Player(db.Model):
             "status": self.status,
             "team": self.team,
             "otherpseudo": self.otherpseudo,
-            "winningmonney": self.winningmonney
+            "winningmonney": self.winningmonney,
+            "pseudo": self.pseudo
         }
 
 

@@ -115,7 +115,13 @@ def get_players(page,number=None):
         
         nationality=re.findall(r'<span class="flag"><a href="/rocketleague/Category:(.*?)"', Information_Player_In_Progress_all_div["Nationality:"])
         info_about_player["nationality"]=",".join(nationality)
+        try:
+            pseudo_real=re.findall(r'</span></span>(.*?)</div></div>', Information_Player_In_Progress)
+            pseudo_real[0]=pseudo_real[0].replace("&#160;","")
+            info_about_player["pseudo"]=pseudo_real[0]
+        except:
+            info_about_player["pseudo"]=""
         info_all_player.append(info_about_player)
+        
     return info_all_player
-
 

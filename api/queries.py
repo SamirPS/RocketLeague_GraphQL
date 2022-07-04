@@ -86,3 +86,16 @@ def getPlayer_ByName_resolver(obj, info, name):
         }
     return payload
 
+def getPlayer_ByPseudo_resolver(obj, info, pseudo):
+    try:
+        player = Player.query.filter_by(pseudo=pseudo).first()
+        payload = {
+            "success": True,
+            "player": player.to_dict()
+        }
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": [f"Player item matching {pseudo} not found"]
+        }
+    return payload
