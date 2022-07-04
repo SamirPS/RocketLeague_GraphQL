@@ -68,13 +68,15 @@ def get_players(page,number=None):
     link_players = []
     info_all_player=[]
     rows = re.findall(r'<tr><td style="text-align:left">(.*?)</td>',Region_Player)
+
     for row in rows:
         link_of_user=re.findall(r'<a href="(.*?)" title="(.*?)">',row)[-1][0]
         if "&amp;action=edit&amp;redlink=1" not in link_of_user:
             link_players.append(link_of_user)
-    i=1
+    
     if number!=None:
         link_players=link_players[0:number]
+        
     for player in link_players:
         info_about_player={}
         time.sleep(30) 
@@ -90,20 +92,32 @@ def get_players(page,number=None):
             continue
 
         Information_Player_In_Progress_all_div={i[0]:i[1] for i in re.findall(r'<div class="infobox-cell-2 infobox-description">(.*?)</div><div class="infobox-cell-2">(.*?)</div>', Information_Player_In_Progress) }
-        info_about_player["name"]=Information_Player_In_Progress_all_div["Name:"]
+        
+        try:
+            info_about_player["name"]=Information_Player_In_Progress_all_div["Name:"]
+        except:
+            info_about_player["name"]=""
+
         try:
             info_about_player["born"]=Information_Player_In_Progress_all_div["Born:"]
         except:
             info_about_player["born"]=""
         
-
-        info_about_player["status"]=Information_Player_In_Progress_all_div["Status:"]
+        try:
+            info_about_player["status"]=Information_Player_In_Progress_all_div["Status:"]
+        except:
+            info_about_player["status"]=""
         
-        info_about_player["winningmonney"]=Information_Player_In_Progress_all_div["Approx. Total Winnings:"]
+        try:
+            info_about_player["winningmonney"]=Information_Player_In_Progress_all_div["Approx. Total Winnings:"]
+        except:
+            info_about_player["winningmonney"]=""
+
         try:
             info_about_player["otherpseudo"]=Information_Player_In_Progress_all_div["Alternate IDs:"]
         except:
             info_about_player["otherpseudo"]=""
+
         try:
             team=re.findall(r'>(.*?)</a>', Information_Player_In_Progress_all_div["Team:"])
             if "&amp;action=edit&amp;redlink=1" in team[-1]:
@@ -113,8 +127,12 @@ def get_players(page,number=None):
         except:
             info_about_player["team"]=""
         
-        nationality=re.findall(r'<span class="flag"><a href="/rocketleague/Category:(.*?)"', Information_Player_In_Progress_all_div["Nationality:"])
-        info_about_player["nationality"]=",".join(nationality)
+        try:
+            nationality=re.findall(r'<span class="flag"><a href="/rocketleague/Category:(.*?)"', Information_Player_In_Progress_all_div["Nationality:"])
+            info_about_player["nationality"]=",".join(nationality)
+        except:
+            info_about_player["nationality"]=""
+
         try:
             pseudo_real=re.findall(r'</span></span>(.*?)</div></div>', Information_Player_In_Progress)
             pseudo_real[0]=pseudo_real[0].replace("&#160;","")
@@ -122,6 +140,6 @@ def get_players(page,number=None):
         except:
             info_about_player["pseudo"]=""
         info_all_player.append(info_about_player)
-        
+
     return info_all_player
 

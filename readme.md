@@ -136,6 +136,7 @@ query {
       team
       winningmonney
       otherpseudo
+      pseudo
     }
   }
 }
@@ -159,9 +160,32 @@ query {
       team
       winningmonney
       otherpseudo
+      pseudo
     }
   }
 }
 
 ```
 
+#### Get a player by pseudo
+
+If you want to get information about a player thanks to the pseudo of the player.Use the following query:
+
+```graphql
+query {
+  getPlayer_ByPseudo(pseudo:"FabiDerKrosse"){
+    player {
+      id
+      name
+      nationality
+      born
+      status
+      team
+      winningmonney
+      otherpseudo
+      pseudo
+    }
+  }
+}
+
+```
