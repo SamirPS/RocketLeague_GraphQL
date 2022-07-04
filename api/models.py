@@ -47,8 +47,8 @@ class Player(db.Model):
     region = db.Column(db.String)
     status = db.Column(db.String)
     team = db.Column(db.String)
-    alternate_IDs = db.Column(db.String)
-    approx_Total_Winnings = db.Column(db.String)
+    otherpseudo = db.Column(db.String)
+    winningmonney = db.Column(db.String)
  
 
     def to_dict(self):
@@ -60,8 +60,8 @@ class Player(db.Model):
             "region": self.region,
             "status": self.status,
             "team": self.team,
-            "alternate_IDs": self.alternate_IDs,
-            "approx_Total_Winnings": self.approx_Total_Winnings
+            "otherpseudo": self.otherpseudo,
+            "winningmonney": self.winningmonney
         }
 
 

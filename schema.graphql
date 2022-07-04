@@ -26,8 +26,8 @@ type Player {
     region: String!
     status: String!
     team: String!
-    alternate_IDs: String!
-    approx_Total_Winnings: String!
+    otherpseudo: String!
+    winningmonney: String!
 
 }
 

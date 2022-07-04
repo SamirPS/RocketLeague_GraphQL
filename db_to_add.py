@@ -6,6 +6,7 @@ db.session.commit()
 
 db.create_all()
 
+
 from api.models import Region
 
 EU=Region(name="EU")
@@ -76,10 +77,11 @@ for i in SSA_Team:
     db.session.add(x)
     db.session.commit()
 
-from api.models import Player
-Vatira=Player(name="Axel Touret",nationality="France",born="May 14, 2006",region="EU",status="Active",team="Moist Esports",alternate_IDs="Vati",approx_Total_Winnings="74,978")
 
-Turboplosa=Player(name="Pierre Silfver",nationality="Sweden",born="August 9, 1998",region="NA",status="Active",team="OpTic Gaming",alternate_IDs="Turururu, Turbop0lsa, Turbo",approx_Total_Winnings="446,102")
+from api.models import Player
+Vatira=Player(name="Axel Touret",nationality="France",born="May 14, 2006",region="EU",status="Active",team="Moist Esports",otherpseudo="Vati",winningmonney="74,978")
+
+Turboplosa=Player(name="Pierre Silfver",nationality="Sweden",born="August 9, 1998",region="NA",status="Active",team="OpTic Gaming",otherpseudo="Turururu, Turbop0lsa, Turbo",winningmonney="446,102")
 
 db.session.add(Vatira)
 db.session.add(Turboplosa)

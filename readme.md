@@ -133,13 +133,14 @@ query {
       region
       status
       team
+      winningmonney
+      otherpseudo
     }
   }
 }
 
 ```
 
-( I need to fix the other attributes of player)
 
 #### Get a player by name
 
@@ -156,6 +157,8 @@ query {
       region
       status
       team
+      winningmonney
+      otherpseudo
     }
   }
 }
@@ -177,6 +180,8 @@ query {
       region
       status
       team
+      winningmonney
+      otherpseudo
     }
   }
 }
