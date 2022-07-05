@@ -137,9 +137,15 @@ def get_players(page,number=None):
             pseudo_real=re.findall(r'</span></span>(.*?)</div></div>', Information_Player_In_Progress)
             pseudo_real[0]=pseudo_real[0].replace("&#160;","")
             info_about_player["pseudo"]=pseudo_real[0]
+            if info_about_player["pseudo"]=="":
+                raise ValueError
         except:
-            info_about_player["pseudo"]=""
+            try:
+                pseudo_real=re.findall(r'</span>(.*?)</div></div>', Information_Player_In_Progress)
+                pseudo_real[0]=pseudo_real[0].replace("&#160;","")
+                info_about_player["pseudo"]=pseudo_real[0]
+            except:
+                info_about_player["pseudo"]=""
         info_all_player.append(info_about_player)
-
     return info_all_player
 
