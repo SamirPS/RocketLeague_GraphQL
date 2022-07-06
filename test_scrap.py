@@ -17,10 +17,12 @@ def Get_Information_About_Team(LinkOfActiveTeams):
         }
 
         time.sleep(30)
-        Team_In_Progress=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={i}&format=json",headers=headers).json()["parse"]["text"]["*"]
+        Team_In_Progress=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={i}&format=json",headers=headers).json()["parse"]
+        Team_In_Progress_text_html=Team_In_Progress["text"]["*"]
+
         start = '<span class="mw-headline" id="Player_Roster">Player Roster</span>'
         end = '<span class="mw-headline" id="Former">Former</span>'
-        Roster=Team_In_Progress[Team_In_Progress.find(start)+len(start):Team_In_Progress.rfind(end)]
+        Roster=Team_In_Progress_text_html[Team_In_Progress_text_html.find(start)+len(start):Team_In_Progress_text_html.rfind(end)]
         Player_Team=re.findall(r'<tr class="Player">(.*?)</tr>',Roster)
         count=1
         for j in Player_Team:
@@ -39,10 +41,11 @@ def Get_Information_About_Team(LinkOfActiveTeams):
             Coach_Name[0]=Coach_Name[0].replace("&amp;action=edit&amp;redlink=1","")
             Players_Of_The_Team["coach"]=Coach_Name[0]
 
-        i=i.replace("_"," ")
-        Players_Of_The_Team["name"]=i
+        
+        Players_Of_The_Team["name"]=Team_In_Progress["title"]
         List_Of_Teams.append(Players_Of_The_Team)
         print(Players_Of_The_Team)
+        
        
     return List_Of_Teams
 
@@ -81,12 +84,13 @@ def get_players(page,number=None):
         info_about_player={}
         time.sleep(30) 
         player=player.replace("/rocketleague/","")
-        Player_in_Progress=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={player}&format=json",headers=headers).json()["parse"]["text"]["*"]
+        Player_in_Progress=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={player}&format=json",headers=headers).json()["parse"]
+        Player_in_Progress_html=Player_in_Progress["text"]["*"]
        
         
         start = '<div class="fo-nttax-infobox wiki-bordercolor-light">'
         end = '<div class="fo-nttax-infobox-adbox wiki-bordercolor-light">'
-        Information_Player_In_Progress=Player_in_Progress[Player_in_Progress.find(start)+len(start):Player_in_Progress.rfind(end)]
+        Information_Player_In_Progress=Player_in_Progress_html[Player_in_Progress_html.find(start)+len(start):Player_in_Progress_html.rfind(end)]
 
         if '<div class="infobox-cell-2">Player</div>' not in Information_Player_In_Progress:
             continue
@@ -133,19 +137,8 @@ def get_players(page,number=None):
         except:
             info_about_player["nationality"]=""
 
-        try:
-            pseudo_real=re.findall(r'</span></span>(.*?)</div></div>', Information_Player_In_Progress)
-            pseudo_real[0]=pseudo_real[0].replace("&#160;","")
-            info_about_player["pseudo"]=pseudo_real[0]
-            if info_about_player["pseudo"]=="":
-                raise ValueError
-        except:
-            try:
-                pseudo_real=re.findall(r'</span>(.*?)</div></div>', Information_Player_In_Progress)
-                pseudo_real[0]=pseudo_real[0].replace("&#160;","")
-                info_about_player["pseudo"]=pseudo_real[0]
-            except:
-                info_about_player["pseudo"]=""
+        
+        info_about_player["pseudo"]=Player_in_Progress["title"]
         info_all_player.append(info_about_player)
     return info_all_player
 
