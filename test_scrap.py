@@ -161,8 +161,8 @@ def Get_Transfer(number_of_transfert=None):
         transfert_in_progress={
             "date":"",
             "players":"",
-            "OldTeam":"",
-            "NewTeam":""
+            "oldteam":"",
+            "newteam":""
         }
         
         transfert_in_progress["date"]=transfert[0]
@@ -170,22 +170,22 @@ def Get_Transfer(number_of_transfert=None):
         transfert_in_progress["players"]=",".join(i[-1] for i in Name_Of_Players)
 
         if "<i>None</i>" in transfert[2]:
-            transfert_in_progress["OldTeam"]="None"
+            transfert_in_progress["oldteam"]="None"
         elif "<i>Retired</i>" in transfert[2]:
-            transfert_in_progress["OldTeam"]="Retired"
+            transfert_in_progress["oldteam"]="Retired"
         elif '<abbr title="">TBD</abbr>' in transfert[2]:
-            transfert_in_progress["OldTeam"]="TBD"
+            transfert_in_progress["oldteam"]="TBD"
         else:
-            transfert_in_progress["OldTeam"]=re.findall(r'<a href="/rocketleague/(.*?) title="(.*?)">(.*?)</a>', transfert[2])[-1][-1]
+            transfert_in_progress["oldteam"]=re.findall(r'<a href="/rocketleague/(.*?) title="(.*?)">(.*?)</a>', transfert[2])[-1][-1]
         
         if "<i>None</i>" in transfert[4]:
-            transfert_in_progress["NewTeam"]="None"
+            transfert_in_progress["newteam"]="None"
         elif "<i>Retired</i>" in transfert[4]:
-            transfert_in_progress["NewTeam"]="Retired"
+            transfert_in_progress["newteam"]="Retired"
         elif '<abbr title="">TBD</abbr>' in transfert[4]:
-            transfert_in_progress["NewTeam"]="TBD"
+            transfert_in_progress["newteam"]="TBD"
         else:
-            transfert_in_progress["NewTeam"]=re.findall(r'<a href="/rocketleague/(.*?) title="(.*?)">(.*?)</a>', transfert[4])[-1][-1]
+            transfert_in_progress["newteam"]=re.findall(r'<a href="/rocketleague/(.*?) title="(.*?)">(.*?)</a>', transfert[4])[-1][-1]
         
         Transfer_List.append(transfert_in_progress)
 

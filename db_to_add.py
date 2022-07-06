@@ -90,6 +90,6 @@ for i in all_player:
 from api.models import Transfer
 
 for i in Get_Transfer():
-    x=Transfer(date=i["date"],players=i["players"],OldTeam=i["OldTeam"],NewTeam=i["NewTeam"])
+    x=Transfer(date=i["date"],players=i["players"],oldteam=i["oldteam"],newteam=i["newteam"])
     db.session.add(x)
     db.session.commit()

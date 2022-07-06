@@ -35,8 +35,8 @@ type Transfert{
     id: ID!
     date: String! 
     players: String!
-    OldTeam: String!
-    NewTeam: String!
+    oldteam: String!
+    newteam: String!
 }
 
 

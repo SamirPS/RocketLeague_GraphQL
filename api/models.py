@@ -16,15 +16,16 @@ class Transfer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String)
     players = db.Column(db.String)
-    OldTeam = db.Column(db.String)
-    NewTeam = db.Column(db.String)
+    oldteam = db.Column(db.String)
+    newteam = db.Column(db.String)
 
     def to_dict(self):
         return {
+            "id": self.id,
             "date": self.date,
             "players" : self.players,
-            "OldTeam" : self.OldTeam,
-            "NewTeam": self.NewTeam
+            "oldteam" : self.oldteam,
+            "newteam": self.newteam
         }
 
 
