@@ -1,4 +1,4 @@
-name: Run Script
+name: Update Database
 
 on: [workflow_dispatch]
 
