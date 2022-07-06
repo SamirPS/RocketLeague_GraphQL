@@ -30,9 +30,9 @@ def Get_Information_About_Team(LinkOfActiveTeams):
             Player_Name[0]=Player_Name[0].replace("index.php?title=","")
             Player_Name[0]=Player_Name[0].replace("&amp;action=edit&amp;redlink=1","")
             if "Substitute" in j:
-                Players_Of_The_Team["sub"]=Player_Name[0]
+                Players_Of_The_Team["sub"]=Player_Name[0].replace("_"," ")
             else:
-                Players_Of_The_Team[str(count)]=Player_Name[0]
+                Players_Of_The_Team[str(count)]=Player_Name[0].replace("_"," ")
             count+=1
         Coach_Name=re.findall(r'<tr class="Player coach"(.*?)</tr>',Roster)
         for j in Coach_Name:
