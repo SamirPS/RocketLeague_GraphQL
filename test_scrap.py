@@ -142,3 +142,15 @@ def get_players(page,number=None):
         info_all_player.append(info_about_player)
     return info_all_player
 
+def Get_Transfer(number_of_transfert=None):
+    time.sleep(30)
+    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
+    Last_Transfer=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page=Transfers&format=json",headers=headers).json()["parse"]["text"]["*"]
+    
+    start = '<div class="divTable mainpage-transfer Ref" style="text-align: center; width:100%;">'
+    end = '<div class="content-ad navigation-not-searchable">'
+
+    Last_Transfer_Information=Last_Transfer[Last_Transfer.find(start)+len(start):Last_Transfer.rfind(end)]
+    print(re.findall(r'<div class="divCell Date">(.*?)</div><div class="divCell Name">(.*?)</div><div class="divCell Team OldTeam">(.*?)</div>(.*?)<div class="divCell Team NewTeam">(.*?)</div>', Last_Transfer_Information)[0])
+    return []
+    
