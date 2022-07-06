@@ -86,3 +86,10 @@ for i in all_player:
     x=Player(name=i["name"],pseudo=i["pseudo"],nationality=i["nationality"],born=i["born"],status=i["status"],team=i["team"],otherpseudo=i["otherpseudo"],winningmonney=i["winningmonney"])
     db.session.add(x)
     db.session.commit()
+
+from api.models import Transfer
+
+for i in Get_Transfer():
+    x=Transfer(date=i["date"],players=i["players"],OldTeam=i["OldTeam"],NewTeam=i["NewTeam"])
+    db.session.add(x)
+    db.session.commit()

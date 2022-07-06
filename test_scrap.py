@@ -151,6 +151,43 @@ def Get_Transfer(number_of_transfert=None):
     end = '<div class="content-ad navigation-not-searchable">'
 
     Last_Transfer_Information=Last_Transfer[Last_Transfer.find(start)+len(start):Last_Transfer.rfind(end)]
-    print(re.findall(r'<div class="divCell Date">(.*?)</div><div class="divCell Name">(.*?)</div><div class="divCell Team OldTeam">(.*?)</div>(.*?)<div class="divCell Team NewTeam">(.*?)</div>', Last_Transfer_Information)[0])
-    return []
-    
+    Last_Transfer_Information=re.findall(r'<div class="divCell Date">(.*?)</div><div class="divCell Name">(.*?)</div><div class="divCell Team OldTeam">(.*?)</div>(.*?)<div class="divCell Team NewTeam">(.*?)</div>', Last_Transfer_Information)
+
+    if number_of_transfert!=None:
+        Last_Transfer_Information=Last_Transfer_Information[0:number_of_transfert]
+       
+    Transfer_List=[]
+    for transfert in Last_Transfer_Information:
+        transfert_in_progress={
+            "date":"",
+            "players":"",
+            "OldTeam":"",
+            "NewTeam":""
+        }
+        
+        transfert_in_progress["date"]=transfert[0]
+        Name_Of_Players=re.findall(r'</span> <a href="/rocketleague/(.*?) title="(.*?)">(.*?)</a>', transfert[1])
+        transfert_in_progress["players"]=",".join(i[-1] for i in Name_Of_Players)
+
+        if "<i>None</i>" in transfert[2]:
+            transfert_in_progress["OldTeam"]="None"
+        elif "<i>Retired</i>" in transfert[2]:
+            transfert_in_progress["OldTeam"]="Retired"
+        elif '<abbr title="">TBD</abbr>' in transfert[2]:
+            transfert_in_progress["OldTeam"]="TBD"
+        else:
+            transfert_in_progress["OldTeam"]=re.findall(r'<a href="/rocketleague/(.*?) title="(.*?)">(.*?)</a>', transfert[2])[-1][-1]
+        
+        if "<i>None</i>" in transfert[4]:
+            transfert_in_progress["NewTeam"]="None"
+        elif "<i>Retired</i>" in transfert[4]:
+            transfert_in_progress["NewTeam"]="Retired"
+        elif '<abbr title="">TBD</abbr>' in transfert[4]:
+            transfert_in_progress["NewTeam"]="TBD"
+        else:
+            transfert_in_progress["NewTeam"]=re.findall(r'<a href="/rocketleague/(.*?) title="(.*?)">(.*?)</a>', transfert[4])[-1][-1]
+        
+        Transfer_List.append(transfert_in_progress)
+
+    return Transfer_List
+

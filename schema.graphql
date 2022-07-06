@@ -31,6 +31,14 @@ type Player {
 
 }
 
+type Transfert{
+    id: ID!
+    date: String! 
+    players: String!
+    OldTeam: String!
+    NewTeam: String!
+}
+
 
 type TeamResult {
     success: Boolean!
@@ -62,6 +70,12 @@ type PlayersResult {
     player: [Player]
 }
 
+type TransfersResult {
+    success: Boolean!
+    errors: [String]
+    transfert: [Transfert]
+}
+
 type Query {
     listAllTeams: TeamsResult!
     getTeam_ByName(name: String!): TeamResult!
@@ -72,5 +86,6 @@ type Query {
     listAllPlayers: PlayersResult!
     getPlayer_ByName(name: String!): PlayerResult!
     getPlayer_ByPseudo(pseudo: String!): PlayerResult!
+    listAlltransferts: TransfersResult!
     
 }

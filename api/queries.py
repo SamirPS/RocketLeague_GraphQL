@@ -1,4 +1,4 @@
-from .models import Team,Region,Player
+from .models import Team,Region,Player,Transfer
 
 def listTeams_resolver(obj, info):
     try:
@@ -97,5 +97,19 @@ def getPlayer_ByPseudo_resolver(obj, info, pseudo):
         payload = {
             "success": False,
             "errors": [f"Player item matching {pseudo} not found"]
+        }
+    return payload
+
+def listTransfert_resolver(obj, info):
+    try:
+        transferts = [transfert.to_dict() for transfert in Transfer.query.all()]
+        payload = {
+            "success": True,
+            "transfert": transferts
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
         }
     return payload
