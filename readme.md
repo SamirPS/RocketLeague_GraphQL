@@ -189,3 +189,28 @@ query {
 }
 
 ```
+
+
+
+### Transfers
+
+#### Get all transfers
+
+If you want to get all the Transfers listed in the Sqlite database, you can use the following query:
+
+```graphql
+query {
+  listAlltransferts {
+    success
+    errors
+    transfert {
+      id
+      players
+      oldteam
+      newteam
+      date
+    }
+  }
+}
+
+```
