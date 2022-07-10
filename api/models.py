@@ -94,9 +94,9 @@ class Matches(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "countdown": self.name,
-            "team_un": self.team1,
-            "team_deux": self.team2,
+            "countdown": self.countdown,
+            "team_un": self.team_un,
+            "team_deux": self.team_deux,
             "score": self.score
         }
 
