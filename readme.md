@@ -214,3 +214,25 @@ query {
 }
 
 ```
+
+### Matches
+
+#### Get all matches
+
+If you want to get all the matches in the Sqlite database, you can use the following query:
+
+```graphql
+query {
+  listAllMatches {
+    success
+    errors
+    matche {
+      id
+      team_un
+      team_deux
+      countdown
+      score
+    }
+  }
+}
+```
