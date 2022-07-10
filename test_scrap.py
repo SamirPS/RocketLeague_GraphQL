@@ -44,7 +44,6 @@ def Get_Information_About_Team(LinkOfActiveTeams):
         
         Players_Of_The_Team["name"]=Team_In_Progress["title"]
         List_Of_Teams.append(Players_Of_The_Team)
-        print(Players_Of_The_Team)
         
        
     return List_Of_Teams
@@ -191,3 +190,46 @@ def Get_Transfer(number_of_transfert=None):
 
     return Transfer_List
 
+def Get_Ongoing_And_Upcoming_Matches():
+    time.sleep(30)
+    headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
+    Matches_Page=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page=Liquipedia:Matches&format=json",headers=headers).json()["parse"]["text"]["*"]
+
+    start = '<div data-toggle-area-content="1">'
+    end = '<div data-toggle-area-content="2">'
+    Matches_Page_Information=Matches_Page[Matches_Page.find(start)+len(start):Matches_Page.rfind(end)].replace("\n","")
+    Matches_Page_Information=re.findall(r'<tbody>(.*?)</tbody>', Matches_Page_Information)
+
+    All_Matches=[]
+
+    for match in Matches_Page_Information:
+        match_in_progress={
+            "countdown":"",
+            "team_un":"",
+            "team_deux":"",
+            "score":"None",
+        } 
+        try:
+            match_in_progress["team_un"]=re.findall(r'<td class="team-left"><span data-highlightingclass="(.*?)"', match)[0]
+        except:
+            continue
+        try:
+            match_in_progress["team_deux"]=re.findall(r'<td class="team-right"><span data-highlightingclass="(.*?)"', match)[0]
+        except:
+            continue
+        try:
+            match_in_progress["score"]=re.findall(r'<td class="versus">(.*?)</td>', match)[0]
+            if "vs" in match_in_progress["score"].lower():
+                match_in_progress["score"]="None"
+        except:
+            continue
+
+        try:
+            match_in_progress["countdown"]=re.findall(r'<span class="timer-object timer-object-countdown-only" (.*?)>(.*?)<', match)[0][1]
+        except:
+            continue
+        
+        All_Matches.append(match_in_progress)
+    return All_Matches
+
+    

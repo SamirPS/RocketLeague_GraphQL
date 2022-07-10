@@ -1,4 +1,4 @@
-from .models import Team,Region,Player,Transfer
+from .models import Team,Region,Player,Transfer,Matches
 
 def listTeams_resolver(obj, info):
     try:
@@ -106,6 +106,20 @@ def listTransfert_resolver(obj, info):
         payload = {
             "success": True,
             "transfert": transferts
+        }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload
+
+def listMatches_resolver(obj, info):
+    try:
+        matches = [matche.to_dict() for matche in Matches.query.all()]
+        payload = {
+            "success": True,
+            "matche": matches
         }
     except Exception as error:
         payload = {

@@ -82,6 +82,24 @@ class Player(db.Model):
 
 
 
+class Matches(db.Model):
+    __tablename__ = 'matches'
+
+    id = db.Column(db.Integer, primary_key=True)
+    countdown = db.Column(db.String)
+    team_un = db.Column(db.String)
+    team_deux = db.Column(db.String)
+    score = db.Column(db.String)
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "countdown": self.name,
+            "team_un": self.team1,
+            "team_deux": self.team2,
+            "score": self.score
+        }
+
 
 
 

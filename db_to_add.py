@@ -93,3 +93,11 @@ for i in Get_Transfer():
     x=Transfer(date=i["date"],players=i["players"],oldteam=i["oldteam"],newteam=i["newteam"])
     db.session.add(x)
     db.session.commit()
+
+from api.models import Matches
+
+for i in Get_Ongoing_And_Upcoming_Matches():
+    x=Matches(countdown=i["countdown"],team_un=i["team_un"],team_deux=i["team_deux"],score=i["score"])
+    db.session.add(x)
+    db.session.commit()
+
