@@ -6,44 +6,47 @@ def Get_Information_About_Team(LinkOfActiveTeams):
     List_Of_Teams=[]
     headers = {'User-Agent': 'RocketLeague_GraphQL On Github (https://github.com/SamirPS/RocketLeague_GraphQL,samirakarioh1@gmail.com)', 'Accept-Encoding': 'gzip'}
     for i in LinkOfActiveTeams:
-        i=i.replace("/rocketleague/","")
-        Players_Of_The_Team={
-            "name":"",
-            "1":"",
-            "2":"",
-            "3":"",
-            "sub":"",
-            "coach":""
-        }
+        try:
+            i=i.replace("/rocketleague/","")
+            Players_Of_The_Team={
+                "name":"",
+                "1":"",
+                "2":"",
+                "3":"",
+                "sub":"",
+                "coach":""
+            }
 
-        time.sleep(30)
-        Team_In_Progress=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={i}&format=json",headers=headers).json()["parse"]
-        Team_In_Progress_text_html=Team_In_Progress["text"]["*"]
+            time.sleep(30)
+            Team_In_Progress=requests.get(f"https://liquipedia.net/rocketleague/api.php?action=parse&page={i}&format=json",headers=headers).json()["parse"]
+            Team_In_Progress_text_html=Team_In_Progress["text"]["*"]
 
-        start = '<span class="mw-headline" id="Player_Roster">Player Roster</span>'
-        end = '<span class="mw-headline" id="Former">Former</span>'
-        Roster=Team_In_Progress_text_html[Team_In_Progress_text_html.find(start)+len(start):Team_In_Progress_text_html.rfind(end)]
-        Player_Team=re.findall(r'<tr class="Player">(.*?)</tr>',Roster)
-        count=1
-        for j in Player_Team:
-            Player_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
-            Player_Name[0]=Player_Name[0].replace("index.php?title=","")
-            Player_Name[0]=Player_Name[0].replace("&amp;action=edit&amp;redlink=1","")
-            if "Substitute" in j:
-                Players_Of_The_Team["sub"]=Player_Name[0].replace("_"," ")
-            else:
-                Players_Of_The_Team[str(count)]=Player_Name[0].replace("_"," ")
-            count+=1
-        Coach_Name=re.findall(r'<tr class="Player coach"(.*?)</tr>',Roster)
-        for j in Coach_Name:
-            Coach_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
-            Coach_Name[0]=Coach_Name[0].replace("index.php?title=","")
-            Coach_Name[0]=Coach_Name[0].replace("&amp;action=edit&amp;redlink=1","")
-            Players_Of_The_Team["coach"]=Coach_Name[0]
+            start = '<span class="mw-headline" id="Player_Roster">Player Roster</span>'
+            end = '<span class="mw-headline" id="Former">Former</span>'
+            Roster=Team_In_Progress_text_html[Team_In_Progress_text_html.find(start)+len(start):Team_In_Progress_text_html.rfind(end)]
+            Player_Team=re.findall(r'<tr class="Player">(.*?)</tr>',Roster)
+            count=1
+            for j in Player_Team:
+                Player_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
+                Player_Name[0]=Player_Name[0].replace("index.php?title=","")
+                Player_Name[0]=Player_Name[0].replace("&amp;action=edit&amp;redlink=1","")
+                if "Substitute" in j:
+                    Players_Of_The_Team["sub"]=Player_Name[0].replace("_"," ")
+                else:
+                    Players_Of_The_Team[str(count)]=Player_Name[0].replace("_"," ")
+                count+=1
+            Coach_Name=re.findall(r'<tr class="Player coach"(.*?)</tr>',Roster)
+            for j in Coach_Name:
+                Coach_Name=re.findall(r'<span style="white-space:pre"><a href="/rocketleague/(.*?)"',j)
+                Coach_Name[0]=Coach_Name[0].replace("index.php?title=","")
+                Coach_Name[0]=Coach_Name[0].replace("&amp;action=edit&amp;redlink=1","")
+                Players_Of_The_Team["coach"]=Coach_Name[0]
 
-        
-        Players_Of_The_Team["name"]=Team_In_Progress["title"]
-        List_Of_Teams.append(Players_Of_The_Team)
+            
+            Players_Of_The_Team["name"]=Team_In_Progress["title"]
+            List_Of_Teams.append(Players_Of_The_Team)
+        except:
+            continue
         
        
     return List_Of_Teams
@@ -232,4 +235,3 @@ def Get_Ongoing_And_Upcoming_Matches():
         All_Matches.append(match_in_progress)
     return All_Matches
 
-    
