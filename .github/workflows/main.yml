@@ -1,8 +1,7 @@
 name: Update Database
 
 on:
-  schedule:
-    - cron: "05 16 * * *"
+  workflow_dispatch
 
 jobs:
   build:
