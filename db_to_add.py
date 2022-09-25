@@ -14,8 +14,7 @@ NA=Region(name="NA")
 OCE=Region(name="OCE")
 SAM=Region(name="SAM")
 MENA=Region(name="MENA")
-APACN=Region(name="APAC N")
-APACS=Region(name="APAC S")
+APAC=Region(name="APAC")
 SSA=Region(name="SSA")
 
 db.session.add(EU)
@@ -23,8 +22,7 @@ db.session.add(NA)
 db.session.add(OCE)
 db.session.add(SAM)
 db.session.add(MENA)
-db.session.add(APACN)
-db.session.add(APACS)
+db.session.add(APAC)
 db.session.add(SSA)
 
 
@@ -37,8 +35,7 @@ NA_Team=Get_Teams("Portal:Teams/North_America")
 OCE_Team=Get_Teams("Portal:Teams/Oceania")
 SAM_Team=Get_Teams("Portal:Teams/South_America")
 MENA_Team=Get_Teams("Portal:Teams/Middle_East_and_North_Africa")
-APACN_Team=Get_Teams("Portal:Teams/Asia-Pacific_North")
-APACS_Team=Get_Teams("Portal:Teams/Asia-Pacific_South")
+APAC_Team=Get_Teams("Portal:Teams/Asia-Pacific")
 SSA_Team=Get_Teams("Portal:Teams/Sub-Saharan_Africa")
 
 
@@ -64,12 +61,8 @@ for i in MENA_Team:
     x=Team(region="MENA",name=i["name"],player_one=i["1"],player_two=i["2"],player_three=i["3"],player_sub=i["sub"],coach=i["coach"])
     db.session.add(x)
     db.session.commit()
-for i in APACN_Team:
-    x=Team(region="APAC N",name=i["name"],player_one=i["1"],player_two=i["2"],player_three=i["3"],player_sub=i["sub"],coach=i["coach"])
-    db.session.add(x)
-    db.session.commit()
-for i in APACS_Team:
-    x=Team(region="APAC S",name=i["name"],player_one=i["1"],player_two=i["2"],player_three=i["3"],player_sub=i["sub"],coach=i["coach"])
+for i in APAC_Team:
+    x=Team(region="APAC",name=i["name"],player_one=i["1"],player_two=i["2"],player_three=i["3"],player_sub=i["sub"],coach=i["coach"])
     db.session.add(x)
     db.session.commit()
 for i in SSA_Team:
