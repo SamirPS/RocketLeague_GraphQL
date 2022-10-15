@@ -1,4 +1,4 @@
-from app import db
+from app import db,app
 from test_scrap import *
 
 with app.app_context():
