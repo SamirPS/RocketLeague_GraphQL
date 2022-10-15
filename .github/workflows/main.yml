@@ -3,6 +3,8 @@ name: Update Database
 on:
   schedule:
     - cron: "0 19 * * *"
+  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   build:
