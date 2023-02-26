@@ -1,5 +1,5 @@
 flask
-ariadne 
+ariadne==0.13.0
 flask-sqlalchemy 
 flask-cors
 requests
