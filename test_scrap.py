@@ -184,6 +184,8 @@ def Get_Transfer(number_of_transfert=None):
             transfert_in_progress["newteam"]="None"
         elif "<i>Retired</i>" in transfert[4]:
             transfert_in_progress["newteam"]="Retired"
+        elif '<i>Inactive</i>' in transfert[4]:
+            transfert_in_progress["newteam"]="Inactive"
         elif '<abbr title="">TBD</abbr>' in transfert[4]:
             transfert_in_progress["newteam"]="TBD"
         else:
